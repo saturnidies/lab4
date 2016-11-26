@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 4</title>
+    <script type="text/javascript">
+        function factorialCalculation() {
+            var factorialCache = {};
+
+            function factorialWithMemorisation(n) {
+                if (n === 0 || n === 1)
+                    return 1;
+                if (!factorialCache[n])
+                    factorialCache[n] = n * factorialWithMemorisation(n - 1);
+                return factorialCache[n];
+            }
+
+            document.getElementById('factorialOutput').value =
+                    factorialWithMemorisation(document.getElementById('factorialInput').value);
+        }
+        function multiplyCalculation() {
+            function multiply(a, b) {
+                return a * b;
+            }
+
+            function foo(a) {
+                return function (b) {
+                    return multiply(a, b);
+                }
+            }
+
+            document.getElementById('multiOutput').value =
+                    foo(document.getElementById('multiInput1').value)(document.getElementById('multiInput2').value);
+        }
+    </script>
+</head>
+<body>
+<p>
+    <input type="text" size="15" id="multiInput1" title="Enter value:" value="42">
+    *
+    <input type="text" size="15" id="multiInput2" title="Enter value:" value="63">
+    <input type="button" value="Умножение" onclick="multiplyCalculation()">
+    <input type="text" size="15" id="multiOutput" title="Result">
+</p>
+<p>
+    <input type="text" size="15" id="factorialInput" title="Enter value:" value="11">
+    <input type="button" value="Факториал" onclick="factorialCalculation()">
+    <input type="text" size="15" id="factorialOutput" title="Result">
+</p>
+</body>
+</html>
